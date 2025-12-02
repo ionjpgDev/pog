@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Alumno</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .navbar {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .welcome-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .welcome-card h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card h3 {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .action-btn {
+            background: #28a745;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .action-btn:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+        
+        .action-btn.secondary {
+            background: #6c757d;
+        }
+        
+        .action-btn.secondary:hover {
+            background: #5a6268;
+        }
+        
+        .action-btn.warning {
+            background: #ffc107;
+            color: #212529;
+        }
+        
+        .action-btn.warning:hover {
+            background: #e0a800;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+        <a href="/" class="navbar-brand">🏫 Sistema Deportivo UMSA</a>
+        <div class="nav-links">
+            <a th:href="@{/alumno/panel}">Inicio</a>
+            <a th:href="@{/alumno/deportes}">Deportes</a>
+            <a th:href="@{/alumno/postular}">Postular</a>
+            <a th:href="@{/alumno/postulaciones}">Mis Postulaciones</a>
+            <a th:href="@{/alumno/cursos-inscritos}">Cursos Inscritos</a>
+            <a th:href="@{/alumno/perfil}">Mi Perfil</a>
+        </div>
+        <div class="user-info">
+            <span th:text="${nombre}">Usuario</span>
+            <a href="/" style="color: white; margin-left: 20px;">← Volver al inicio</a>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <div class="welcome-card">
+            <h2>👋 ¡Bienvenido, <span th:text="${nombre}"></span>!</h2>
+            <p>Desde este panel puedes gestionar todas tus actividades deportivas en la UMSA.</p>
+            <p><strong>Código de alumno:</strong> <span th:text="${codigo}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${email}"></span></p>
+        </div>
+
+        <!-- Estadísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Cursos Inscritos</h3>
+                <div class="number">2</div>
+            </div>
+            <div class="stat-card">
+                <h3>Postulaciones Activas</h3>
+                <div class="number">1</div>
+            </div>
+            <div class="stat-card">
+                <h3>Deportes Disponibles</h3>
+                <div class="number">4</div>
+            </div>
+            <div class="stat-card">
+                <h3>Asistencia Promedio</h3>
+                <div class="number">85%</div>
+            </div>
+        </div>
+
+        <!-- Acciones rápidas -->
+        <div class="quick-actions">
+            <a th:href="@{/alumno/deportes}" class="action-btn">🏃 Ver Deportes Disponibles</a>
+            <a th:href="@{/alumno/postular}" class="action-btn">📝 Postular a un Curso</a>
+            <a th:href="@{/alumno/postulaciones}" class="action-btn secondary">📋 Ver Mis Postulaciones</a>
+            <a th:href="@{/alumno/cursos-inscritos}" class="action-btn">📚 Cursos Inscritos</a>
+            <a th:href="@{/alumno/perfil}" class="action-btn warning">👤 Mi Perfil</a>
+        </div>
+
+        <!-- Información adicional -->
+        <div class="welcome-card" style="margin-top: 30px;">
+            <h3>📅 Próximas Actividades</h3>
+            <ul style="margin-top: 15px; padding-left: 20px;">
+                <li>Clase de Natación - Hoy 15:00</li>
+                <li>Torneo de Fútbol - 20/11/2023</li>
+                <li>Inscripción nuevos cursos - 25/11/2023</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

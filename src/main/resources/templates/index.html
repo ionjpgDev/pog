@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Principal - Sistema Deportivo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .main-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+        
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .menu-link {
+            padding: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(45deg, #5a6fd8, #6a4190);
+        }
+        
+        .menu-link:nth-child(1) {
+            background: linear-gradient(45deg, #dc3545, #c82333);
+        }
+        
+        .menu-link:nth-child(1):hover {
+            background: linear-gradient(45deg, #c82333, #bd2130);
+        }
+        
+        .menu-link:nth-child(2) {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+        }
+        
+        .menu-link:nth-child(2):hover {
+            background: linear-gradient(45deg, #0056b3, #004a9c);
+        }
+        
+        .menu-link:nth-child(3) {
+            background: linear-gradient(45deg, #28a745, #1e7e34);
+        }
+        
+        .menu-link:nth-child(3):hover {
+            background: linear-gradient(45deg, #1e7e34, #19692c);
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .welcome-text {
+            color: #444;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .menu-link {
+                font-size: 1.5rem;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h1>🏫 Sistema de Gestión Deportiva UMSA</h1>
+        
+        <p class="subtitle">Sistema para administración de escuelas deportivas</p>
+        
+        <div class="welcome-text">
+            <p>Selecciona el módulo que deseas utilizar:</p>
+            <p><small>Esta es una versión de demostración sin autenticación</small></p>
+        </div>
+        
+        <div class="menu-buttons">
+            <a th:href="@{/administrador}" class="menu-link">👨‍💼 Administrador</a>
+            <a th:href="@{/alumno}" class="menu-link">👨‍🎓 Alumno</a>
+            <a th:href="@{/entrenador}" class="menu-link">👨‍🏫 Entrenador</a>
+        </div>
+        
+        <div style="margin-top: 30px; color: #888; font-size: 0.9rem;">
+            <p>Universidad Mayor de San Andrés - Facultad de Ingeniería</p>
+            <p>Proyecto de Escuelas Deportivas - Versión 1.0</p>
+        </div>
+    </div>
+</body>
+</html>
