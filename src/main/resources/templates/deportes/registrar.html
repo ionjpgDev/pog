@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">Registrar Deporte</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">🏫 Escuelas Deportivas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/deporte}">Deportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/curso}">Cursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/alumno/panel}">Alumnos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Formulario -->
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0"><i class="fas fa-plus"></i> Registrar Nuevo Deporte</h4>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/deporte/registrar}" method="post" id="deporteForm">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre del Deporte *</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" 
+                                       required minlength="3" maxlength="50"
+                                       placeholder="Ej: Fútbol, Natación, Baloncesto">
+                                <div class="form-text">Ingrese el nombre completo del deporte.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="tipo" class="form-label">Tipo de Deporte *</label>
+                                <select class="form-select" id="tipo" name="tipo" required>
+                                    <option value="">Seleccione un tipo</option>
+                                    <option value="Equipo">Equipo</option>
+                                    <option value="Individual">Individual</option>
+                                    <option value="Contacto">Contacto</option>
+                                    <option value="Acuático">Acuático</option>
+                                    <option value="Interior">Interior</option>
+                                    <option value="Exterior">Exterior</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                                <div class="form-text">Seleccione la categoría principal del deporte.</div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="edadMinima" class="form-label">Edad Mínima *</label>
+                                    <input type="number" class="form-control" id="edadMinima" name="edadMinima" 
+                                           required min="3" max="80" value="5">
+                                    <div class="form-text">Edad mínima para practicar este deporte.</div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="edadMaxima" class="form-label">Edad Máxima *</label>
+                                    <input type="number" class="form-control" id="edadMaxima" name="edadMaxima" 
+                                           required min="3" max="80" value="60">
+                                    <div class="form-text">Edad máxima para practicar este deporte.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Requisitos</label>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="requiereCertificado" name="requiereCertificado">
+                                    <label class="form-check-label" for="requiereCertificado">
+                                        Requiere certificado médico
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="requiereEquipo" name="requiereEquipo">
+                                    <label class="form-check-label" for="requiereEquipo">
+                                        Requiere equipo especial
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="requiereInscripcion" name="requiereInscripcion">
+                                    <label class="form-check-label" for="requiereInscripcion">
+                                        Requiere inscripción previa
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <textarea class="form-control" id="descripcion" name="descripcion" 
+                                          rows="3" placeholder="Descripción detallada del deporte..."></textarea>
+                                <div class="form-text">Opcional: agregue una descripción detallada.</div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/deporte}" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> Cancelar
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Registrar Deporte
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="card mt-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="fas fa-info-circle"></i> Información Importante</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="mb-0">
+                            <li>Los campos marcados con * son obligatorios.</li>
+                            <li>La edad mínima no puede ser mayor que la edad máxima.</li>
+                            <li>Una vez registrado, el deporte estará disponible para crear cursos.</li>
+                            <li>Puede editar la información del deporte más tarde.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>© 2024 Escuelas Deportivas - Proyecto 131</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Validación del formulario
+        document.getElementById('deporteForm').addEventListener('submit', function(e) {
+            const edadMinima = parseInt(document.getElementById('edadMinima').value);
+            const edadMaxima = parseInt(document.getElementById('edadMaxima').value);
+            
+            if (edadMinima > edadMaxima) {
+                e.preventDefault();
+                alert('La edad mínima no puede ser mayor que la edad máxima.');
+                document.getElementById('edadMinima').focus();
+                return false;
+            }
+            
+            if (edadMinima < 3 || edadMaxima > 80) {
+                e.preventDefault();
+                alert('Las edades deben estar entre 3 y 80 años.');
+                return false;
+            }
+            
+            return true;
+        });
+    </script>
+</body>
+</html>

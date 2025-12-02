@@ -6,13 +6,13 @@ public class ColaEDAlumno {
     private NodoAlumno frente;
     private NodoAlumno fin;
     private int tamaño;
-
+    
     public ColaEDAlumno() {
         this.frente = null;
         this.fin = null;
         this.tamaño = 0;
     }
-
+    
     public void encolarAlumno(Alumno alumno) {
         NodoAlumno nuevo = new NodoAlumno(alumno);
         if (frente == null) {
@@ -24,10 +24,10 @@ public class ColaEDAlumno {
         }
         tamaño++;
     }
-
+    
     public Alumno desencolarAlumno() {
         if (frente == null) return null;
-
+        
         Alumno alumno = frente.getDato();
         frente = frente.getSiguiente();
         if (frente == null) {
@@ -36,25 +36,48 @@ public class ColaEDAlumno {
         tamaño--;
         return alumno;
     }
-
+    
     public Alumno verFrenteAlumno() {
         if (frente == null) return null;
         return frente.getDato();
     }
-
+    
     public void mostrarColaAlumnos() {
         NodoAlumno actual = frente;
+        int posicion = 1;
         while (actual != null) {
-            actual.getDato();
+            System.out.println(posicion + ". " + actual.getDato().getNombre() + 
+                             " " + actual.getDato().getApellidos() + 
+                             " (CI: " + actual.getDato().getCi() + ")");
             actual = actual.getSiguiente();
+            posicion++;
+        }
+        if (tamaño == 0) {
+            System.out.println("La cola de espera está vacía.");
         }
     }
-
+    
     public int getTamaño() {
         return tamaño;
     }
-
+    
     public boolean estaVacia() {
         return frente == null;
+    }
+    
+    public NodoAlumno getFrente() {
+        return frente;
+    }
+    
+    public void setFrente(NodoAlumno frente) {
+        this.frente = frente;
+    }
+    
+    public NodoAlumno getFin() {
+        return fin;
+    }
+    
+    public void setFin(NodoAlumno fin) {
+        this.fin = fin;
     }
 }

@@ -1,22 +1,20 @@
 package com.proyecto131.escuelas_deportivas.util.estructuras;
-
-import com.proyecto131.escuelas_deportivas.model.Alumno;
-
-public class ListaEDAlumno {
-    private NodoAlumno primero;
+import com.proyecto131.escuelas_deportivas.model.Instructor;
+public class ListaEDInstructor {
+    private NodoInstructor primero;
     private int tamaño;
-    
-    public ListaEDAlumno() {
+
+    public ListaEDInstructor() {
         this.primero = null;
         this.tamaño = 0;
     }
-    
-    public void insertarAlumno(Alumno alumno) {
-        NodoAlumno nuevo = new NodoAlumno(alumno);
+
+    public void adicionar(Instructor instructor) {
+        NodoInstructor nuevo = new NodoInstructor(instructor);
         if (primero == null) {
             primero = nuevo;
         } else {
-            NodoAlumno actual = primero;
+            NodoInstructor actual = primero;
             while (actual.getSiguiente() != null) {
                 actual = actual.getSiguiente();
             }
@@ -24,21 +22,21 @@ public class ListaEDAlumno {
         }
         tamaño++;
     }
-    
-    public Alumno eliminarAlumno(String ci) {
+
+    public Instructor eliminar(String ci) {
         if (primero == null) return null;
-        
+
         if (primero.getDato().getCi().equals(ci)) {
-            Alumno eliminado = primero.getDato();
+            Instructor eliminado = primero.getDato();
             primero = primero.getSiguiente();
             tamaño--;
             return eliminado;
         }
-        
-        NodoAlumno actual = primero;
+
+        NodoInstructor actual = primero;
         while (actual.getSiguiente() != null) {
             if (actual.getSiguiente().getDato().getCi().equals(ci)) {
-                Alumno eliminado = actual.getSiguiente().getDato();
+                Instructor eliminado = actual.getSiguiente().getDato();
                 actual.setSiguiente(actual.getSiguiente().getSiguiente());
                 tamaño--;
                 return eliminado;
@@ -47,9 +45,9 @@ public class ListaEDAlumno {
         }
         return null;
     }
-    
-    public Alumno buscarAlumno(String ci) {
-        NodoAlumno actual = primero;
+
+    public Instructor buscarInstructor(String ci) {
+        NodoInstructor actual = primero;
         while (actual != null) {
             if (actual.getDato().getCi().equals(ci)) {
                 return actual.getDato();
@@ -58,35 +56,25 @@ public class ListaEDAlumno {
         }
         return null;
     }
-    
-    public void mostrarAlumnos() {
-        NodoAlumno actual = primero;
-        int contador = 1;
+
+    public void mostrar() {
+        NodoInstructor actual = primero;
         while (actual != null) {
-            System.out.println(contador + ". " + actual.getDato().getNombre() + " " + 
-                             actual.getDato().getApellidos() + " (CI: " + 
-                             actual.getDato().getCi() + ")");
+            actual.getDato().mostrarDatos();
+            System.out.println("-------------------");
             actual = actual.getSiguiente();
-            contador++;
-        }
-        if (tamaño == 0) {
-            System.out.println("No hay alumnos en la lista.");
         }
     }
-    
+
     public int getTamaño() {
         return tamaño;
     }
-    
+
     public boolean estaVacia() {
         return primero == null;
     }
-    
-    public NodoAlumno getPrimero() {
+
+    public NodoInstructor getPrimero() {
         return primero;
-    }
-    
-    public void setPrimero(NodoAlumno primero) {
-        this.primero = primero;
     }
 }
