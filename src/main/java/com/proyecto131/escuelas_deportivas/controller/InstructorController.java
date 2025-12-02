@@ -9,6 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.proyecto131.escuelas_deportivas.util.estructuras.ListaEDInstructor;
+import com.proyecto131.escuelas_deportivas.util.estructuras.NodoInstructor;
+
+import java.util.List;
+import java.util.ArrayList;
+
 @Controller
 @RequestMapping("/instructor")
 public class InstructorController {
@@ -22,7 +28,21 @@ public class InstructorController {
     @GetMapping("/panel")
     public String mostrarPanel(Model model) {
         model.addAttribute("titulo", "Panel del Instructor");
-        model.addAttribute("instructores", servicioInstructores.obtenerTodosInstructores());
+        
+        // Obtener la lista enlazada de instructores
+        ListaEDInstructor listaInstructores = servicioInstructores.obtenerTodosInstructores();
+        
+        // Convertir la lista enlazada a una lista estándar de Java
+        List<Instructor> instructores = new ArrayList<>();
+        if (listaInstructores != null && !listaInstructores.estaVacia()) {
+            NodoInstructor actual = listaInstructores.getPrimero();
+            while (actual != null) {
+                instructores.add(actual.getDato());
+                actual = actual.getSiguiente();
+            }
+        }
+        
+        model.addAttribute("instructores", instructores);
         return "instructor/panel";
     }
     

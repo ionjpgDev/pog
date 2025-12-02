@@ -42,22 +42,11 @@ public class ColaEDAlumno {
         return frente.getDato();
     }
     
-    public void mostrarColaAlumnos() {
-        NodoAlumno actual = frente;
-        int posicion = 1;
-        while (actual != null) {
-            System.out.println(posicion + ". " + actual.getDato().getNombre() + 
-                             " " + actual.getDato().getApellidos() + 
-                             " (CI: " + actual.getDato().getCi() + ")");
-            actual = actual.getSiguiente();
-            posicion++;
-        }
-        if (tamaño == 0) {
-            System.out.println("La cola de espera está vacía.");
-        }
+    public int getTamaño() {
+        return tamaño;
     }
     
-    public int getTamaño() {
+    public int getTamanio() {
         return tamaño;
     }
     

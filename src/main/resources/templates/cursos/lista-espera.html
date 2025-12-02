@@ -42,7 +42,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="alumno, stat : ${curso.listaEspera}">
+                            <tr th:if="${#lists.isEmpty(listaEspera)}">
+                                <td colspan="5" class="text-center">La lista de espera está vacía</td>
+                            </tr>
+                            <tr th:each="alumno, stat : ${listaEspera}">
                                 <td th:text="${stat.count}"></td>
                                 <td th:text="${alumno.ci}"></td>
                                 <td th:text="${alumno.nombre}"></td>

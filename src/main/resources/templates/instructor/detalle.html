@@ -33,7 +33,7 @@
                     <p class="card-text"><strong>Fecha de Nacimiento:</strong> <span th:text="${instructor.fechaNacimiento}"></span></p>
                     <p class="card-text"><strong>Fecha de Registro:</strong> <span th:text="${instructor.fechaRegistro}"></span></p>
                     <p class="card-text"><strong>Estado:</strong> <span th:text="${instructor.activo} ? 'Activo' : 'Inactivo'"></span></p>
-                    <p class="card-text"><strong>Cursos Asignados:</strong> <span th:text="${instructor.cursosAsignados.tamaño}"></span></p>
+                    <p class="card-text"><strong>Cursos Asignados:</strong> <span th:text="${instructor.cursosAsignados.getTamanio()}"></span></p>
                 </div>
             </div>
         </div>

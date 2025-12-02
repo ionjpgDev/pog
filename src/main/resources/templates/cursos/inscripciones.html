@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">Historial de Inscripciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Escuelas Deportivas</a>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h1 th:text="${titulo}">Historial de Inscripciones</h1>
+
+    <div th:if="${curso}">
+        <h3 th:text="'Curso: ' + ${curso.nombreCurso}"></h3>
+
+        <div th:if="${#lists.isEmpty(inscripciones)}" class="alert alert-info mt-3">
+            No hay inscripciones registradas para este curso.
+        </div>
+
+        <div th:unless="${#lists.isEmpty(inscripciones)}" class="mt-3">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>CI Alumno</th>
+                    <th>Nombre Alumno</th>
+                    <th>Activa</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ins : ${inscripciones}">
+                    <td th:text="${ins.id}"></td>
+                    <td th:text="${ins.fechaInscripcion}"></td>
+                    <td th:text="${ins.estudiante.ci}"></td>
+                    <td th:text="${ins.estudiante.nombre + ' ' + ins.estudiante.apellidos}"></td>
+                    <td th:text="${ins.activa} ? 'Sí' : 'No'"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <a th:href="@{/curso/detalle/{id}(id=${curso.id})}" class="btn btn-secondary mt-3">Volver al detalle</a>
+    </div>
+    <div th:unless="${curso}">
+        <div class="alert alert-warning" role="alert">
+            No se encontró el curso.
+        </div>
+        <a th:href="@{/curso}" class="btn btn-secondary">Volver</a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

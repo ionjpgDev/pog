@@ -55,7 +55,7 @@
                             <td th:text="${instructor.nombre}"></td>
                             <td th:text="${instructor.apellidos}"></td>
                             <td th:text="${instructor.email}"></td>
-                            <td th:text="${instructor.cursosAsignados.tamaño}"></td>
+                            <td th:text="${instructor.cursosAsignados.getTamanio()}"></td>
                             <td>
                                 <a th:href="@{/instructor/detalle/{ci}(ci=${instructor.ci})}" class="btn btn-info btn-sm">Ver</a>
                                 <a th:href="@{/instructor/cursos/{ci}(ci=${instructor.ci})}" class="btn btn-warning btn-sm">Cursos</a>

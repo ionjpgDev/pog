@@ -9,148 +9,88 @@
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 100px 0;
-            text-align: center;
+            padding: 90px 0 70px 0;
         }
+
+        .hero h1 {
+            font-weight: 700;
+        }
+
+        .hero-buttons {
+            justify-content: center;
+        }
+
+        .hero-buttons .btn {
+            min-width: 200px;
+        }
+
         .stat-card {
-            border-radius: 10px;
-            padding: 20px;
-            margin: 10px 0;
             text-align: center;
-            transition: transform 0.3s;
+            padding: 25px 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            background-color: #ffffff;
         }
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
+
         .stat-card h3 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: bold;
+            margin-bottom: 5px;
         }
-        .bg-primary-light {
-            background-color: #e3f2fd;
-        }
-        .bg-success-light {
-            background-color: #e8f5e9;
-        }
-        .bg-warning-light {
-            background-color: #fff3e0;
-        }
-        .bg-info-light {
-            background-color: #e0f7fa;
+
+        .stat-card p {
+            margin-bottom: 0;
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" th:href="@{/}">🏫 Escuelas Deportivas</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/}">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/deporte}">Deportes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/curso}">Cursos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/alumno/panel}">Alumnos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/instructor/panel}">Instructores</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/login}">Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+   
 
-    <!-- Hero Section -->
     <div class="hero">
-        <div class="container">
+        <div class="container text-center">
             <h1 class="display-4 mb-4">Bienvenido a Escuelas Deportivas</h1>
-            <p class="lead mb-4">Sistema de gestión para escuelas deportivas - Desarrollado con Spring Boot y estructuras de datos personalizadas</p>
-            <a th:href="@{/curso}" class="btn btn-light btn-lg">Ver Cursos Disponibles</a>
+            <p class="lead mb-4">Sistema de gestión de deportes, cursos, alumnos e instructores</p>
+
+            <div class="d-flex flex-column flex-sm-row flex-wrap gap-2 hero-buttons">
+                <a th:href="@{/curso}" class="btn btn-light btn-lg">Ver Cursos Disponibles</a>
+                <a class="btn btn-light btn-lg" th:href="@{/instructor/panel}">Ver Instructores</a>
+                <a class="btn btn-light btn-lg" th:href="@{/alumno/panel}">Alumnos</a>
+                <a class="btn btn-light btn-lg" th:href="@{/deporte}">Deportes</a>
+                <a class="btn btn-light btn-lg" th:href="@{/admin/postulaciones}">Panel de Postulaciones</a>
+            </div>
         </div>
     </div>
 
-    <!-- Stats Section -->
     <div class="container my-5">
         <div class="row">
-            <div class="col-md-3">
-                <div class="stat-card bg-primary-light">
-                    <h3 th:text="${cantidadDeportes}">5</h3>
+            <div class="col-md-3 mb-3">
+                <div class="stat-card">
+                    <h3 th:text="${cantidadDeportes}"></h3>
                     <p class="text-muted">Deportes</p>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="stat-card bg-success-light">
-                    <h3 th:text="${cantidadCursos}">3</h3>
+            <div class="col-md-3 mb-3">
+                <div class="stat-card">
+                    <h3 th:text="${cantidadCursos}"></h3>
                     <p class="text-muted">Cursos Activos</p>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="stat-card bg-warning-light">
-                    <h3 th:text="${cantidadAlumnos}">5</h3>
+            <div class="col-md-3 mb-3">
+                <div class="stat-card">
+                    <h3 th:text="${cantidadAlumnos}"></h3>
                     <p class="text-muted">Alumnos</p>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="stat-card bg-info-light">
-                    <h3 th:text="${cantidadInstructores}">3</h3>
+            <div class="col-md-3 mb-3">
+                <div class="stat-card">
+                    <h3 th:text="${cantidadInstructores}"></h3>
                     <p class="text-muted">Instructores</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Features Section -->
-    <div class="container my-5">
-        <h2 class="text-center mb-5">Características del Sistema</h2>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">🏐 Gestión de Deportes</h5>
-                        <p class="card-text">Administra diferentes deportes con sus características específicas: edad mínima/máxima, requerimientos, etc.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">📚 Gestión de Cursos</h5>
-                        <p class="card-text">Crea y administra cursos deportivos con cupos limitados, lista de espera y asignación de instructores.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">👥 Gestión de Alumnos</h5>
-                        <p class="card-text">Registra y administra alumnos, inscríbelos en cursos y lleva un control de su participación.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <p>© 2024 Escuelas Deportivas - Proyecto 131</p>
-            <p class="mb-0">Sistema desarrollado con Spring Boot y estructuras de datos personalizadas (Listas, Colas, Nodos)</p>
-        </div>
-    </footer>
-
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -78,6 +78,10 @@ public class ListaEDAlumno {
         return tamaño;
     }
     
+    public int getTamanio() {
+        return tamaño;
+    }
+    
     public boolean estaVacia() {
         return primero == null;
     }

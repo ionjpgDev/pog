@@ -96,6 +96,14 @@ public class ListaEDCurso {
         } while (intercambiado);
     }
     
+    public int getTamaño() {
+        return tamaño;
+    }
+    
+    public int getTamanio() {
+        return tamaño;
+    }
+    
     public void mostrarCursos() {
         NodoCurso actual = primero;
         int contador = 1;
@@ -122,10 +130,6 @@ public class ListaEDCurso {
         }
     }
     
-    public int getTamaño() {
-        return tamaño;
-    }
-    
     public NodoCurso getPrimero() {
         return primero;
     }
@@ -134,11 +138,27 @@ public class ListaEDCurso {
         this.primero = primero;
     }
     
+    public boolean estaVacia() {
+        return tamaño == 0;
+    }
+    
     public NodoCurso getUltimo() {
         return ultimo;
     }
     
     public void setUltimo(NodoCurso ultimo) {
         this.ultimo = ultimo;
+    }
+    
+    public Curso getCurso(int index) {
+        if (index < 0 || index >= tamaño) {
+            throw new IndexOutOfBoundsException("Índice fuera de rango: " + index);
+        }
+        
+        NodoCurso actual = primero;
+        for (int i = 0; i < index; i++) {
+            actual = actual.getSiguiente();
+        }
+        return actual.getDato();
     }
 }

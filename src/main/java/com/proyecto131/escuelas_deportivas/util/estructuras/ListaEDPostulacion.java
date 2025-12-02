@@ -85,32 +85,6 @@ public class ListaEDPostulacion {
         } while (intercambiado);
     }
     
-    public void mostrarPostulaciones() {
-        NodoPostulacion actual = primero;
-        int contador = 1;
-        while (actual != null) {
-            System.out.println(contador + ". " + actual.getDato().getEstudiante().getNombre() + 
-                             " " + actual.getDato().getEstudiante().getApellidos() + 
-                             " -> " + actual.getDato().getCurso().getNombreCurso() + 
-                             " (Prioridad: " + actual.getDato().getNivelPrioridad() + 
-                             ", Estado: " + actual.getDato().getEstado() + ")");
-            actual = actual.getSiguiente();
-            contador++;
-        }
-        if (tamaño == 0) {
-            System.out.println("No hay postulaciones en la lista.");
-        }
-    }
-    
-    public void mostrarPostulacionesDetalladas() {
-        NodoPostulacion actual = primero;
-        while (actual != null) {
-            actual.getDato().mostrarDatos();
-            System.out.println("-------------------");
-            actual = actual.getSiguiente();
-        }
-    }
-    
     public int getTamaño() {
         return tamaño;
     }

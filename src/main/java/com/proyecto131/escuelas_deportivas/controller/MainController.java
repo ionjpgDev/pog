@@ -32,22 +32,4 @@ public class MainController {
         model.addAttribute("cantidadCursos", servicioCursos.cantidadCursos());
         return "index";
     }
-    
-    @GetMapping("/login")
-    public String mostrarLogin(Model model) {
-        model.addAttribute("titulo", "Iniciar Sesión");
-        return "login";
-    }
-    
-    @GetMapping("/acerca")
-    public String mostrarAcerca(Model model) {
-        model.addAttribute("titulo", "Acerca de");
-        return "acerca";
-    }
-    
-    @GetMapping("/contacto")
-    public String mostrarContacto(Model model) {
-        model.addAttribute("titulo", "Contacto");
-        return "contacto";
-    }
 }

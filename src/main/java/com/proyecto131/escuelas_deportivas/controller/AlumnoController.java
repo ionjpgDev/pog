@@ -9,6 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.proyecto131.escuelas_deportivas.model.Alumno;
+import com.proyecto131.escuelas_deportivas.util.estructuras.ListaEDAlumno;
+import com.proyecto131.escuelas_deportivas.util.estructuras.NodoAlumno;
+
+import java.util.List;
+import java.util.ArrayList;
+
 @Controller
 @RequestMapping("/alumno")
 public class AlumnoController {
@@ -22,15 +29,29 @@ public class AlumnoController {
     @GetMapping("/panel")
     public String mostrarPanel(Model model) {
         model.addAttribute("titulo", "Panel del Alumno");
-        model.addAttribute("alumnos", servicioAlumnos.obtenerTodosAlumnos());
-        return "alumno/panel";
+        
+        // Obtener la lista enlazada de alumnos
+        ListaEDAlumno listaAlumnos = servicioAlumnos.obtenerTodosAlumnos();
+        
+        // Convertir la lista enlazada a una lista estándar de Java
+        List<Alumno> alumnos = new ArrayList<>();
+        if (listaAlumnos != null && !listaAlumnos.estaVacia()) {
+            NodoAlumno actual = listaAlumnos.getPrimero();
+            while (actual != null) {
+                alumnos.add(actual.getDato());
+                actual = actual.getSiguiente();
+            }
+        }
+        
+        model.addAttribute("alumnos", alumnos);
+        return "alumnos/panel";
     }
     
     @GetMapping("/registrar")
     public String mostrarFormularioRegistro(Model model) {
         model.addAttribute("titulo", "Registrar Alumno");
         model.addAttribute("alumno", new Alumno());
-        return "alumno/registrar";
+        return "alumnos/registrar";
     }
     
     @PostMapping("/registrar")
@@ -43,11 +64,19 @@ public class AlumnoController {
     @GetMapping("/buscar")
     public String buscarAlumno(@RequestParam String ci, Model model) {
         Alumno alumno = servicioAlumnos.buscarAlumnoPorCi(ci);
-        model.addAttribute("titulo", "Buscar Alumno");
+        model.addAttribute("titulo", "Detalle del Alumno");
         model.addAttribute("alumno", alumno);
-        return "alumno/detalle";
+        return "alumnos/detalle";
     }
     
+    @GetMapping("/detalle/{ci}")
+    public String verDetalleAlumno(@PathVariable String ci, Model model) {
+        Alumno alumno = servicioAlumnos.buscarAlumnoPorCi(ci);
+        model.addAttribute("titulo", "Detalle del Alumno");
+        model.addAttribute("alumno", alumno);
+        return "alumnos/detalle";
+    }
+ 
     @GetMapping("/eliminar/{ci}")
     public String eliminarAlumno(@PathVariable String ci, RedirectAttributes redirectAttributes) {
         boolean eliminado = servicioAlumnos.eliminarAlumno(ci);
@@ -62,9 +91,32 @@ public class AlumnoController {
     @GetMapping("/inscribir")
     public String mostrarInscripcion(Model model) {
         model.addAttribute("titulo", "Inscribir en Curso");
-        model.addAttribute("cursos", servicioCursos.obtenerTodosCursos());
-        model.addAttribute("alumnos", servicioAlumnos.obtenerTodosAlumnos());
-        return "alumno/inscribir";
+        
+        // Convertir lista enlazada de alumnos a List<Alumno>
+        ListaEDAlumno listaAlumnos = servicioAlumnos.obtenerTodosAlumnos();
+        List<Alumno> alumnos = new ArrayList<>();
+        if (listaAlumnos != null && !listaAlumnos.estaVacia()) {
+            NodoAlumno actualAl = listaAlumnos.getPrimero();
+            while (actualAl != null) {
+                alumnos.add(actualAl.getDato());
+                actualAl = actualAl.getSiguiente();
+            }
+        }
+
+        // Convertir lista enlazada de cursos a List<Curso>
+        com.proyecto131.escuelas_deportivas.util.estructuras.ListaEDCurso listaCursos = servicioCursos.obtenerTodosCursos();
+        List<com.proyecto131.escuelas_deportivas.model.Curso> cursos = new ArrayList<>();
+        if (listaCursos != null && !listaCursos.estaVacia()) {
+            com.proyecto131.escuelas_deportivas.util.estructuras.NodoCurso actualCur = listaCursos.getPrimero();
+            while (actualCur != null) {
+                cursos.add(actualCur.getDato());
+                actualCur = actualCur.getSiguiente();
+            }
+        }
+
+        model.addAttribute("alumnos", alumnos);
+        model.addAttribute("cursos", cursos);
+        return "alumnos/inscribir";
     }
     
     @PostMapping("/inscribir")

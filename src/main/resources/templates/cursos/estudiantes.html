@@ -42,7 +42,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="alumno : ${curso.estudiantesOficiales}">
+                            <tr th:if="${#lists.isEmpty(estudiantes)}">
+                                <td colspan="5" class="text-center">No hay estudiantes inscritos en este curso</td>
+                            </tr>
+                            <tr th:each="alumno : ${estudiantes}">
                                 <td th:text="${alumno.ci}"></td>
                                 <td th:text="${alumno.nombre}"></td>
                                 <td th:text="${alumno.apellidos}"></td>

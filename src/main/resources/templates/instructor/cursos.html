@@ -42,13 +42,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="curso : ${instructor.cursosAsignados}">
-                                <td th:text="${curso.nombreCurso}"></td>
-                                <td th:text="${curso.deporte.nombre}"></td>
-                                <td th:text="${curso.cupoActual + '/' + curso.cupoMaximo}"></td>
-                                <td th:text="${curso.estado}"></td>
+                            <tr th:if="${instructor.cursosAsignados.getTamanio() == 0}">
+                                <td colspan="5" class="text-center">No hay cursos asignados</td>
+                            </tr>
+                            <tr th:each="i : ${#numbers.sequence(0, instructor.cursosAsignados.getTamanio() - 1)}">
+                                <td th:text="${instructor.cursosAsignados.getCurso(i).nombreCurso}"></td>
+                                <td th:text="${instructor.cursosAsignados.getCurso(i).deporte.nombre}"></td>
+                                <td th:text="${instructor.cursosAsignados.getCurso(i).cupoActual + '/' + instructor.cursosAsignados.getCurso(i).cupoMaximo}"></td>
+                                <td th:text="${instructor.cursosAsignados.getCurso(i).estado}"></td>
                                 <td>
-                                    <a th:href="@{/curso/detalle/{id}(id=${curso.id})}" class="btn btn-info btn-sm">Ver</a>
+                                    <a th:href="@{/curso/detalle/{id}(id=${instructor.cursosAsignados.getCurso(i).id})}" class="btn btn-info btn-sm">Ver</a>
                                 </td>
                             </tr>
                         </tbody>

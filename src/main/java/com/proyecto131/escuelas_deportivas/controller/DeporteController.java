@@ -1,9 +1,12 @@
 package com.proyecto131.escuelas_deportivas.controller;
 
 import com.proyecto131.escuelas_deportivas.model.Deporte;
+import com.proyecto131.escuelas_deportivas.model.Curso;
 import com.proyecto131.escuelas_deportivas.service.ServicioDeportes;
 import com.proyecto131.escuelas_deportivas.util.estructuras.ListaEDDeporte;
 import com.proyecto131.escuelas_deportivas.util.estructuras.NodoDeporte;
+import com.proyecto131.escuelas_deportivas.util.estructuras.ListaEDCurso;
+import com.proyecto131.escuelas_deportivas.util.estructuras.NodoCurso;
 import com.proyecto131.escuelas_deportivas.service.ServicioCursos;
 
 import java.util.ArrayList;
@@ -68,6 +71,19 @@ public class DeporteController {
         Deporte deporte = servicioDeportes.buscarDeportePorId(id);
         model.addAttribute("titulo", "Cursos del Deporte");
         model.addAttribute("deporte", deporte);
+
+        // Convertir la lista enlazada de cursos del deporte a List<Curso>
+        java.util.List<Curso> cursos = new java.util.ArrayList<>();
+        if (deporte != null && deporte.getCursos() != null && !deporte.getCursos().estaVacia()) {
+            ListaEDCurso listaCursos = deporte.getCursos();
+            NodoCurso actual = listaCursos.getPrimero();
+            while (actual != null) {
+                cursos.add(actual.getDato());
+                actual = actual.getSiguiente();
+            }
+        }
+        model.addAttribute("cursos", cursos);
+
         return "deportes/cursos";
     }
 

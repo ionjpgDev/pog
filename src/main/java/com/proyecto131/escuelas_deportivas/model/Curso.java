@@ -2,6 +2,7 @@ package com.proyecto131.escuelas_deportivas.model;
 
 import com.proyecto131.escuelas_deportivas.util.estructuras.ListaEDAlumno;
 import com.proyecto131.escuelas_deportivas.util.estructuras.ColaEDAlumno;
+import com.proyecto131.escuelas_deportivas.util.estructuras.ListaEDAsistencia;
 
 public class Curso {
     private String id;
@@ -14,6 +15,7 @@ public class Curso {
     private String estado;
     private ListaEDAlumno estudiantesOficiales;
     private ColaEDAlumno listaEspera;
+    private ListaEDAsistencia registrosAsistencia;
     private String fechaCreacion;
     private String horario;
     
@@ -23,6 +25,7 @@ public class Curso {
         this.estado = "ACTIVO";
         this.estudiantesOficiales = new ListaEDAlumno();
         this.listaEspera = new ColaEDAlumno();
+        this.registrosAsistencia = new ListaEDAsistencia();
         this.fechaCreacion = java.time.LocalDate.now().toString();
     }
     
@@ -100,6 +103,14 @@ public class Curso {
     
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public ListaEDAsistencia getRegistrosAsistencia() {
+        return registrosAsistencia;
+    }
+
+    public void setRegistrosAsistencia(ListaEDAsistencia registrosAsistencia) {
+        this.registrosAsistencia = registrosAsistencia;
     }
     
     public ListaEDAlumno getEstudiantesOficiales() {
@@ -204,10 +215,5 @@ public class Curso {
     public void mostrarEstudiantes() {
         System.out.println("=== ESTUDIANTES DEL CURSO " + nombreCurso + " ===");
         estudiantesOficiales.mostrarAlumnos();
-    }
-    
-    public void mostrarListaEspera() {
-        System.out.println("=== LISTA DE ESPERA DEL CURSO " + nombreCurso + " ===");
-        listaEspera.mostrarColaAlumnos();
     }
 }

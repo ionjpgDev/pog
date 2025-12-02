@@ -59,31 +59,6 @@ public class ListaEDInscripcion {
         return null;
     }
     
-    public void mostrarInscripciones() {
-        NodoInscripcion actual = primero;
-        int contador = 1;
-        while (actual != null) {
-            System.out.println(contador + ". " + actual.getDato().getEstudiante().getNombre() + 
-                             " " + actual.getDato().getEstudiante().getApellidos() + 
-                             " -> " + actual.getDato().getCurso().getNombreCurso() + 
-                             " (" + actual.getDato().getFechaInscripcion() + ")");
-            actual = actual.getSiguiente();
-            contador++;
-        }
-        if (tamaño == 0) {
-            System.out.println("No hay inscripciones en la lista.");
-        }
-    }
-    
-    public void mostrarInscripcionesDetalladas() {
-        NodoInscripcion actual = primero;
-        while (actual != null) {
-            actual.getDato().mostrarDatos();
-            System.out.println("-------------------");
-            actual = actual.getSiguiente();
-        }
-    }
-    
     public int getTamaño() {
         return tamaño;
     }
